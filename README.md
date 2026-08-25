@@ -1,6 +1,6 @@
-# SOC Capstone Project — Network Monitoring & Attack Detection Lab
+# Falcon Freight Solutions – GRC Audit & Compliance Programme
 
-A simulated Security Operations Center (SOC) environment built using virtual machines to demonstrate security monitoring, intrusion detection, and incident analysis. The lab integrates a firewall, an IDS, and a SIEM platform to detect and investigate simulated cyber attacks including port scanning and brute-force login attempts.
+A comprehensive Governance, Risk & Compliance (GRC) case study conducted for Falcon Freight Solutions, a mid-sized logistics company operating across Southern and East Africa. The project delivers an ISO/IEC 27001:2022 ISMS gap analysis, a third-party vendor risk assessment, and a full suite of corporate security policies to close identified governance gaps.
 
 ## Table of Contents
 
@@ -13,61 +13,62 @@ A simulated Security Operations Center (SOC) environment built using virtual mac
 
 ## Project Overview
 
-The objective of this project was to design and implement a simulated SOC environment capable of detecting and analyzing real-world attack techniques. The lab combined a firewall (`pfSense`), a network-based intrusion detection system (`Suricata`), and a SIEM platform (`Wazuh`) to monitor traffic and endpoint activity across a Windows 10 victim machine and an Ubuntu attacker machine.
+Falcon Freight Solutions is a logistics and supply chain company that scaled its regional operations and vendor relationships faster than its governance and compliance processes, leaving it unable to demonstrate ISO/IEC 27001 conformance. As GRC Analyst Consultant, the objective of this project was to:
 
-Two attacks were simulated — an **Nmap port scan** and an **SSH/Windows brute-force login attack** — to test the environment's detection and alerting capabilities. Both attacks were successfully identified, logged, and correlated across network and host-level sources, demonstrating the value of layered security monitoring in a SOC.
+- Conduct a comprehensive risk assessment across the organization's hybrid infrastructure and vendor network
+- Identify governance and compliance gaps against **ISO/IEC 27001:2022**, **ISO 31000**, and the **NIST Cybersecurity Framework (CSF)**
+- Assess third-party and vendor risk, using **Microsoft Azure** (the cloud shipment tracking provider) as a case example
+- Recommend and draft a standardized GRC framework and supporting policy suite
+- Deliver an audit-ready compliance report with a prioritized remediation roadmap
 
 ## Network Topology
 
-The lab consisted of four virtual machines connected through VirtualBox internal and bridged networks:
+Falcon Freight operates a hybrid IT infrastructure spanning head office, regional offices, and a distributed third-party network:
 
-- **pfSense (firewall/router)** — 4 network adapters: Bridged (WAN), Internal Network → LAN, Internal Network → DMZ, and Host-Only
-- **Windows 10 (victim)** — connected via Internal Network → LAN, assigned IP `192.168.2.10`
-- **Ubuntu (attacker)** — connected via Internal Network → LAN, assigned IP `192.168.2.11` / `192.168.2.12`
-- **Wazuh (SIEM server)** — connected via Internal Network with a Bridged Adapter for dashboard access, reachable at `192.168.0.54`
-
-pfSense acted as the central firewall controlling traffic between systems, with a custom firewall rule applied on the OPT2 interface to keep the web management interface accessible during testing. Connectivity between machines was verified using `ping` and `ip a` / `ipconfig` commands, confirming devices were correctly assigned IP addresses on the pfSense LAN network.
+- **Cloud-based shipment tracking platform** — hosted on Microsoft Azure, primary region Azure South Africa North (Johannesburg), with disaster recovery in Azure West Europe (Netherlands)
+- **On-premise Warehouse Management System (WMS)** — hosted and fully secured within Falcon Freight's own infrastructure, network-segmented from corporate and guest networks
+- **Corporate IT systems** — head office in Johannesburg, South Africa, with regional offices across Southern and East Africa connected via site-to-site VPNs / encrypted tunnels
+- **Mobile/field devices** — used by delivery contractors and customs brokers, enrolled in a Mobile Device Management (MDM) solution
+- **Third-party access points** — customs brokers, subcontracted delivery contractors, and technology vendors provisioned with scoped, least-privilege access into the tracking platform and WMS
 
 ## Tools and Technologies
 
-- **VirtualBox** — virtualization platform for hosting all lab machines
-- **pfSense** — firewall/router controlling network traffic
-- **Wazuh** — SIEM platform for log aggregation, alerting, and dashboards
-- **Suricata** — network-based IDS/IPS for detecting malicious traffic
-- **Windows 10** — victim/target machine
-- **Ubuntu** — attacker machine
-- **Nmap** — network scanning and reconnaissance tool
-- **Hydra** — brute-force password auditing tool
-- **Windows Event Viewer** — endpoint log review (Security event logs)
+- **ISO27k ISMS Gap Analysis Questionnaire v1 (2024)** — 161-question assessment across Clauses 4–10 and all 93 Annex A controls
+- **Third-Party & Vendor Risk Questionnaire** — 76-question, 12-domain vendor risk scoring instrument
+- **Microsoft Azure** (cloud hosting, Entra ID / Azure AD, Purview DLP, Azure Key Vault)
+- **Enterprise Risk Register** (Excel-based risk and vendor tracking)
+- **ISO/IEC 27001:2022** and **ISO 31000** frameworks
+- **NIST Cybersecurity Framework (CSF)**
+- **GDPR** and **POPIA** (South African Protection of Personal Information Act) compliance requirements
+- **Microsoft Excel** and **Word** (risk register, questionnaires, and report authoring)
 
 ## Configuration Steps
 
-1. Set up four virtual machines in VirtualBox: pfSense, Windows 10, Ubuntu, and Wazuh, with adapters configured as described in the Network Topology section.
-2. Installed and configured pfSense with WAN and LAN interfaces to act as the central firewall/router.
-3. Accessed the pfSense web interface via HTTPS and added a firewall rule on the OPT2 interface to prevent being locked out during testing.
-4. Verified connectivity between the Ubuntu attacker machine and Windows victim machine using `ping` and confirmed IP assignments with `ip a` and `ipconfig`.
-5. Installed Suricata on the Ubuntu machine and confirmed the service was active using `systemctl status suricata`.
-6. Deployed the Wazuh SIEM server (OVA) and accessed its dashboard over HTTPS.
-7. Installed Wazuh agents on both the Windows 10 and Ubuntu machines, registering the Wazuh manager address (`192.168.0.54`) so both machines began forwarding logs.
-8. Verified both agents showed as active in the Wazuh Endpoints dashboard.
-9. Simulated **Attack 1 — Nmap Scan**: ran `nmap -sS <Windows-IP>` from the Ubuntu attacker machine to identify open ports and services on the Windows target.
-10. Simulated **Attack 2 — Brute Force**: ran `hydra -l user -P passwords.txt ssh://<target-ip>` to generate repeated failed login attempts against the target.
-11. Reviewed Windows Event Viewer Security logs, filtering for Event ID `4625` (failed logon) to confirm the brute-force attempts were recorded locally.
-12. Reviewed Wazuh Discover logs and dashboard alerts to confirm both attacks were detected and correlated across Suricata network alerts and Wazuh host-based logs.
+1. Conducted discovery and scoping to understand Falcon Freight's business operations, hybrid infrastructure, and third-party vendor relationships.
+2. Issued and completed the Third-Party & Vendor Risk Questionnaire for Microsoft Azure (Vendor ID `TPV-001`) across 12 weighted risk domains.
+3. Scored vendor responses (Yes = 2, Partial/Compensating Control = 1, No = 0, Not Applicable excluded) and calculated a weighted overall risk rating.
+4. Conducted the ISO/IEC 27001:2022 ISMS Gap Analysis, evaluating all 10 mandatory management-system Clauses and all Annex A controls across the Organizational, People, Physical, and Technological domains.
+5. Logged all findings, non-conformances, and risk ratings in the Enterprise Risk Register.
+6. Drafted the core policy suite required to close identified gaps:
+   - Information Security Policy
+   - Password & Access Control Policy
+   - Third-Party Vendor Management Policy
+7. Compiled the Vendor Risk Assessment Report – Microsoft Azure, documenting methodology, scoring, key risks (R1–R7), and mitigation actions with owners and timeframes.
+8. Compiled the ISO/IEC 27001 Gap Analysis Findings Report, summarizing critical non-conformances and a phased remediation roadmap (Phase 1: Foundational, Phase 2: Core Controls, Phase 3: Assurance & Maturity).
+9. Mapped all findings back to ISO/IEC 27001, ISO 31000, and NIST CSF to ensure framework alignment.
+10. Delivered final audit-ready reports and a prioritized compliance roadmap to leadership.
 
 ## Results and Findings
 
-- The Nmap scan generated detectable network traffic that was identified by Suricata and forwarded to Wazuh, which displayed alerts showing the source IP (attacker) and destination IP (target), confirming successful reconnaissance detection.
-- The brute-force attack triggered multiple Event ID `4625` failed logon events on the Windows machine, which Wazuh successfully ingested and flagged as suspicious authentication activity.
-- Correlating network-level logs (Suricata) with host-level logs (Wazuh agents on Windows and Ubuntu) provided clear visibility into both attacker and target activity, including source/destination IPs, timestamps, and event details.
-- Challenges encountered included Wazuh agents initially failing to connect due to configuration issues, network misconfiguration between VMs, delayed alerting, and permission errors when running security tools. These were resolved by verifying agent configuration, correcting network adapter settings, adjusting Wazuh time filters, and using elevated (`sudo`) privileges.
-- The project demonstrated the effectiveness of combining a firewall, IDS, and SIEM to detect reconnaissance and brute-force attacks, reinforcing the importance of layered, correlated monitoring in a SOC environment.
-- Recommended improvements identified from the exercise include enforcing strong password policies, implementing account lockout mechanisms, applying network segmentation, tightening firewall rules, and maintaining continuous SIEM monitoring with regular patching.
+- **Vendor Risk Assessment (Microsoft Azure)**: Achieved an overall weighted score of **89.2%**, rated **Low Risk**. Lowest-scoring domains were Incident Management & Breach Notification (78.6%), Data Privacy & Regulatory Compliance (87.5%), and Business Continuity & Disaster Recovery (83.3%).
+- Key vendor risks identified: unconfirmed MFA enforcement on admin accounts, DLP/data masking not yet enabled, no bespoke DPIA completed, breach notification lacking a firm SLA, and no formal API key rotation schedule — each assigned an owner, priority, and remediation timeframe.
+- **ISO/IEC 27001:2022 Gap Analysis**: Of 161 questions assessed, only 16 (10%) were fully conformant (Yes), 100 (62%) were non-conformant (No), 36 (22%) were partial/informal practices, and 9 (6%) were not applicable.
+- **Critical finding**: None of the 10 mandatory ISMS Clauses were satisfied, meaning certification could not currently be achieved; gaps were concentrated in supplier/vendor risk management, incident management, privacy/PII protection, and technical monitoring.
+- **Outcome**: A phased 12-month remediation roadmap was produced, alongside three foundational corporate policies (Information Security Policy, Password & Access Control Policy, Third-Party Vendor Management Policy) to close the identified governance gaps and move Falcon Freight Solutions toward a certifiable ISMS.
 
 ## Author
 
 **Tapiwa Muyengwa**
-Cybersecurity Professional | Purple Team Mindset | Networking, SOC, GRC & Pen Testing
 
 - LinkedIn: [linkedin.com/in/tapiwa-muyengwa-64a9a3320](https://linkedin.com/in/tapiwa-muyengwa-64a9a3320)
 - Email: `Muyengwataps@gmail.com`
