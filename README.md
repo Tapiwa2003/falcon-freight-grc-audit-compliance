@@ -12,6 +12,7 @@ Table of Contents
 	•	Author
 
 Project Overview
+
 Falcon Freight Solutions is a logistics and supply chain company that scaled its regional operations and vendor relationships faster than its governance and compliance processes, leaving it unable to demonstrate ISO/IEC 27001 conformance. As GRC Analyst Consultant, the objective of this project was to:
 
 	•	Conduct a comprehensive risk assessment across the organization’s hybrid infrastructure and vendor network
@@ -40,8 +41,8 @@ Tools and Technologies
 	•	NIST Cybersecurity Framework (CSF)
 	•	GDPR and POPIA (South African Protection of Personal Information Act) compliance requirements
 	•	Microsoft Excel and Word (risk register, questionnaires, and report authoring)
-  
-  Configuration Steps
+
+Configuration Steps
 
 	1.	Conducted discovery and scoping to understand Falcon Freight’s business operations, hybrid infrastructure, and third-party vendor relationships.
 	2.	Issued and completed the Third-Party & Vendor Risk Questionnaire for Microsoft Azure (Vendor ID TPV-001) across 12 weighted risk domains.
@@ -56,10 +57,10 @@ Tools and Technologies
 	8.	Compiled the ISO/IEC 27001 Gap Analysis Findings Report, summarizing critical non-conformances and a phased remediation roadmap (Phase 1: Foundational, Phase 2: Core Controls, Phase 3: Assurance & Maturity).
 	9.	Mapped all findings back to ISO/IEC 27001, ISO 31000, and NIST CSF to ensure framework alignment.
 	10.	Delivered final audit-ready reports and a prioritized compliance roadmap to leadership.
-  
-  Results and Findings
-  
-  	•	Vendor Risk Assessment (Microsoft Azure): Achieved an overall weighted score of 89.2%, rated Low Risk. Lowest-scoring domains were Incident Management & Breach Notification (78.6%), Data Privacy & Regulatory Compliance (87.5%), and Business Continuity & Disaster Recovery (83.3%).
+
+Results and Findings
+
+	•	Vendor Risk Assessment (Microsoft Azure): Achieved an overall weighted score of 89.2%, rated Low Risk. Lowest-scoring domains were Incident Management & Breach Notification (78.6%), Data Privacy & Regulatory Compliance (87.5%), and Business Continuity & Disaster Recovery (83.3%).
 	•	Key vendor risks identified: unconfirmed MFA enforcement on admin accounts, DLP/data masking not yet enabled, no bespoke DPIA completed, breach notification lacking a firm SLA, and no formal API key rotation schedule — each assigned an owner, priority, and remediation timeframe.
 	•	ISO/IEC 27001:2022 Gap Analysis: Of 161 questions assessed, only 16 (10%) were fully conformant (Yes), 100 (62%) were non-conformant (No), 36 (22%) were partial/informal practices, and 9 (6%) were not applicable.
 	•	Critical finding: None of the 10 mandatory ISMS Clauses were satisfied, meaning certification could not currently be achieved; gaps were concentrated in supplier/vendor risk management, incident management, privacy/PII protection, and technical monitoring.
